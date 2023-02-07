@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../Ex1/style.css">
+  <title>Tab</title>
+</head>
+<body>
+  <div class="container">
+    <div class="content">
+      <div class="header">
+        <center><h1>About</h1></center>
+        <center><p>Lorem, ipsum dolor sit amet consectetur</p></center>
+      </div>
+      <div class="image">
+        <img src="../../../Image/R.jpg" alt="image">
+      </div>
+      <div class="footer">
+        <div class="bar">
+          <!-- <input type="radio" name="btn" id=""> -->
+          <button class="btn history" onclick="openTab('history')">History</button>
+          <button class="btn vision" onclick="openTab('vision')">Vision</button>
+          <button class="btn goals" onclick="openTab('goals')">Goals</button>
+        </div>
+        <div class="dec">
+          <div id="history" class="sub-content tab" style="display:block;">
+            <h4>History</h4>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem eius dolore quam officia reprehenderit, nisi alias cupiditate odit iure consequatur illum quisquam sequi voluptatibus debitis, earum saepe error dolorem vero. Culpa dignissimos excepturi alias quisquam natus ab, dolores quaerat sequi.</p>
+          </div>
+          <div id="vision" class="sub-content tab">
+            <h4>Vision</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa perspiciatis facere recusandae dolorum obcaecati, facilis iusto sunt reprehenderit veniam cupiditate?</p>
+          </div>
+          <div id="goals" class="sub-content tab">
+            <h4>Goals</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, optio quaerat dignissimos doloribus omnis excepturi velit quasi recusandae consequatur, doloremque asperiores error delectus.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+  <script>
+    // alert("hello");
+    function openTab(tabName){
+      var i;
+      var x = document.getElementsByClassName("tab");
+      for(i=0; i<x.length; i++){
+        x[i].style.display = "none";
+      }
+      document.getElementById(tabName).style.display = "block";
+      // document.getElementById(tabName).document.getElementsByClassName('btn').style.backgroundColor = '#ffffff';
+    }
+  </script>
+</html>
