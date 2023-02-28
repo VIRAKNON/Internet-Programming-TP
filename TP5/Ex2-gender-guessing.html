@@ -1,0 +1,69 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Rampart+One&family=Titillium+Web&display=swap" rel="stylesheet">
+    <title>Gender Guessing</title>
+</head>
+<body>
+    <div class="container-fluid vh-100 bg-light d-flex justify-content-center align-items-center">
+        <div class="w-75 p-3 shadow bg-success bg-opacity-75 rounded-3 pb-5">
+            <p class="text-center mt-5"><img class="img-thumbnail rounded-pill" src="./giphy.gif" width="150rem" alt=""></p>
+            <h1 class="text-center pb-3 text-dark" style="font-family: 'Rampart One', cursive;">I Know you <strong style="color:dodgerblue ;">Gender</strong></h1>
+            <div class="mx-auto input-group input-group-md mb-3 w-75">
+                <span class="input-group-text rounded-start-3">@</span>
+                <input id="nameInput" type="text" class="form-control" placeholder="Enter your name">
+                <button class="btn btn-secondary rounded-end-3 text-light" onclick="getGender()">Guess</button>
+            </div>
+            <div class="bg-info-subtle w-50 mx-auto shadow rounded-3 px-4 py-1">
+                <p id="loading" class="text-center pt-3">Loading...</p>
+                <p id="name" class="h6 text-center"><b></b></p>
+                <p id="gender" class="h1 text-center text-primary"></p>
+                <p id="percent" class="h4 text-center text-success"></p>
+            </div>
+            <div class="d-flex mx-auto ">
+                <button class="btn btn-warning w-50 mx-auto mt-4" onClick="window.location.reload()">Check Again</button>
+            </div>
+            
+        </div>
+    </div>
+</body>
+
+    <script>
+        const nameInput = document.getElementById("nameInput");
+        const userName = document.getElementById("name");
+        const gender = document.getElementById("gender");
+        const percent = document.getElementById("percent");
+        const loading = document.getElementById("loading");
+
+        function getGender() {
+            const name = nameInput.value;
+            const url = `https://api.genderize.io?name=${name}`;
+            loading.hidden = false;
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                if (data.gender) {
+                    userName.innerHTML = `${name}`;  
+                    gender.innerHTML = `${data.gender}`;
+                    percent.innerHTML = `${(data.probability * 100)}%`;
+                }
+                else {
+                    userName.innerHTML = `Could not found name ${name}`;
+                }
+                })
+                .catch(error => {
+                console.error(error);
+                userName.innerHTML = "An error occurred while fetching data";
+                })
+                .finally(()=>{
+                    loading.hidden = true;
+                })
+        }
+    </script>
+</html>
